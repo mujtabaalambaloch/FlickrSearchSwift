@@ -36,6 +36,6 @@ class Photo: Mappable {
         secret <- map["secret"]
         server <- map["server"]
         title <- map["title"]
-        url = "https://farm\(farm!).staticflickr.com/\(server!)/\(id!)_\(secret!)_{size}.jpg"
+        url = "https://farm\(farm!).staticflickr.com/\(server!)/\(id!)_\(secret!)_h.jpg"
     }
 }

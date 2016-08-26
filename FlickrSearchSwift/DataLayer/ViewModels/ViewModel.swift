@@ -13,6 +13,7 @@ import AlamofireObjectMapper
 class ViewModel: NSObject {
     
     var photoArr = [Photo]()
+    var totalPages: Int?
     
     // MARK: Setup Array
     
@@ -25,14 +26,17 @@ class ViewModel: NSObject {
     func apiCall(text:String, page:Int, completion: ((success : Bool!) -> Void)?) {
         
         var newURL = replaceString(Constants.searchPhotoURL, target:"{page}", with: String(page))
+        let textString = text.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         
-        newURL = replaceString(newURL, target:"{text}", with:text)
+        newURL = replaceString(newURL, target:"{text}", with:textString!)
         
         Alamofire.request(.GET, newURL).responseObject { (response: Response<SearchResponse, NSError>) in
             
             let searchResponse = response.result.value
             
             if let photos = searchResponse?.photos {
+                
+                self.totalPages = photos.pages
                 
                 for one in photos.photo! {
                     self.photoArr.append(one)
@@ -73,6 +77,12 @@ class ViewModel: NSObject {
     
     func photoObjectAtIndex(indexPath: NSIndexPath) -> Photo {
         return self.photoArr[indexPath.row]
+    }
+    
+    // MARK: Total Pages
+    
+    func pagesCount() -> Int {
+        return self.totalPages!
     }
     
 }
