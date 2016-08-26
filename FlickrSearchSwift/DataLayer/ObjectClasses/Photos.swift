@@ -6,8 +6,24 @@
 //  Copyright © 2016 Mujtaba Alam. All rights reserved.
 //
 
-import UIKit
+import ObjectMapper
 
-class Photos: NSObject {
-
+class Photos: Mappable {
+    
+    var page: Int?
+    var pages: Int?
+    var perpage: Int?
+    var total: String?
+    var photo: [Photo]?
+    
+    required init?(_ map: Map) {
+    }
+    
+    func mapping(map: Map) {
+        page <- map["page"]
+        pages <- map["pages"]
+        perpage <- map["perpage"]
+        total <- map["total"]
+        photo <- map["photo"]
+    }
 }
