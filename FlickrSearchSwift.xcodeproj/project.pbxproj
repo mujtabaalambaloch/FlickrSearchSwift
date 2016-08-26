@@ -12,6 +12,7 @@
 		1A48E7CA1D700F8F004B5B6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A48E7C81D700F8F004B5B6B /* Main.storyboard */; };
 		1A48E7CC1D700F8F004B5B6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A48E7CB1D700F8F004B5B6B /* Assets.xcassets */; };
 		1A48E7CF1D700F8F004B5B6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A48E7CD1D700F8F004B5B6B /* LaunchScreen.storyboard */; };
+		1AB34D7B1D7011EC006A46C3 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB34D7A1D7011EC006A46C3 /* ViewModel.swift */; };
 		E3D57A51395B1323C8242192 /* Pods_FlickrSearchSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A70BE7E7635A5300ACC9ED9B /* Pods_FlickrSearchSwift.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		1A48E7CB1D700F8F004B5B6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A48E7CE1D700F8F004B5B6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A48E7D01D700F8F004B5B6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AB34D7A1D7011EC006A46C3 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModel.swift; path = DataLayer/ViewModels/ViewModel.swift; sourceTree = "<group>"; };
 		90163D7ED114BC31D0564D70 /* Pods-FlickrSearchSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSearchSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrSearchSwift/Pods-FlickrSearchSwift.release.xcconfig"; sourceTree = "<group>"; };
 		94BCDEE111DBAAFB723CD407 /* Pods-FlickrSearchSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSearchSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrSearchSwift/Pods-FlickrSearchSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		A70BE7E7635A5300ACC9ED9B /* Pods_FlickrSearchSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickrSearchSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,8 +78,25 @@
 				1A48E7CB1D700F8F004B5B6B /* Assets.xcassets */,
 				1A48E7CD1D700F8F004B5B6B /* LaunchScreen.storyboard */,
 				1A48E7D01D700F8F004B5B6B /* Info.plist */,
+				1AB34D7C1D7011F1006A46C3 /* DataLayer */,
 			);
 			path = FlickrSearchSwift;
+			sourceTree = "<group>";
+		};
+		1AB34D7C1D7011F1006A46C3 /* DataLayer */ = {
+			isa = PBXGroup;
+			children = (
+				1AB34D7D1D7011F9006A46C3 /* ViewModels */,
+			);
+			name = DataLayer;
+			sourceTree = "<group>";
+		};
+		1AB34D7D1D7011F9006A46C3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				1AB34D7A1D7011EC006A46C3 /* ViewModel.swift */,
+			);
+			name = ViewModels;
 			sourceTree = "<group>";
 		};
 		DDBB7F3F3AACB82153FA3C81 /* Frameworks */ = {
@@ -211,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A48E7C71D700F8F004B5B6B /* ViewController.swift in Sources */,
+				1AB34D7B1D7011EC006A46C3 /* ViewModel.swift in Sources */,
 				1A48E7C51D700F8F004B5B6B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
