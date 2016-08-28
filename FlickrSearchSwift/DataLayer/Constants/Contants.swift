@@ -10,8 +10,9 @@ import Foundation
 
 struct Constants {
     static let flickrAPIKey = "b1b93de405ea726a15d4103d0fe78d88"
+    static let flickAPI = "https://api.flickr.com/services/rest/?method="
     
-    static let searchPhotoURL = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(flickrAPIKey)&text={text}&per_page=10&format=json&page={page}&privacy_filter=1&nojsoncallback=1"
+    static let searchPhotoURL = "\(flickAPI)flickr.photos.search&api_key=\(flickrAPIKey)&text={text}&per_page=10&format=json&page={page}&privacy_filter=1&nojsoncallback=1"
     
-    static let photoImage = "https://farm{farm}.staticflickr.com/{server}/{photoID}_{secret}_h.jpg"
+    static let userInfoURL = "\(flickAPI)flickr.people.getInfo&api_key=\(flickrAPIKey)&user_id={user_id}&format=json&nojsoncallback=1"
 }

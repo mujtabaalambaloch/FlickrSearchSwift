@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 import SDWebImage
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController {
 
     @IBOutlet weak var searchTextField: UITextField!
     
@@ -29,17 +29,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.searchTextField.layer.cornerRadius = 2.0
         self.searchButton.layer.cornerRadius = 2.0
+        self.textfieldPadding()
         
-        tableView.delegate = self
-        tableView.dataSource = self
         self.viewModel.setupArr()
         
-        self.tableView.estimatedRowHeight = 215
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 320
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         self.emptyTable()
-        //self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,16 +45,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     // MARK: Search Action
     @IBAction func searchFlickr(sender: AnyObject) {
-        searchTextField.resignFirstResponder()
-        if searchTextField.text?.isEmpty == false {
-            self.viewModel.setupArr()
-            self.messageLabel!.text = ""
-            self.searchString = searchTextField.text!
-            self.callAPI(searchTextField.text!, pageNum: 1)
-        }
+        self.validateText()
+    }
+    
+    // MARK: UITextfield Methods
+    
+    func textfieldPadding() -> Void {
+        let textHeight = self.searchTextField.frame.size.height
+        let paddingView = UIView(frame: CGRectMake(0, 0, 2, textHeight))
+        self.searchTextField.leftView = paddingView
+        self.searchTextField.leftViewMode = .Always
+    }
+    
+    func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
+        self.validateText()
+        return true
     }
     
     // MARK: API Call
+    
+    func validateText() -> Void {
+        self.searchTextField.resignFirstResponder()
+        if self.searchTextField.text?.isEmpty == false {
+            self.viewModel.setupArr()
+            self.messageLabel!.text = ""
+            self.searchString = self.searchTextField.text!
+            self.callAPI(self.searchTextField.text!, pageNum: 1)
+        }
+    }
+    
     func callAPI(text:String, pageNum:Int) -> Void {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         self.viewModel.apiCall(text, page: pageNum) { (success) in
@@ -75,7 +91,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func emptyTable() {
         messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-        messageLabel!.text = "Please Try Search\nTo Find Images"
+        //messageLabel!.text = "Please Try Search\nTo Find Images"
         messageLabel!.textColor = UIColor.lightGrayColor()
         messageLabel!.numberOfLines = 0
         messageLabel!.textAlignment = .Center
@@ -93,16 +109,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:FlickrPhotoCell = self.tableView.dequeueReusableCellWithIdentifier("Cell")! as! FlickrPhotoCell
-        cell.flickrImageView.sd_setImageWithURL(viewModel.photoURLAtIndex(indexPath))
+        
+        cell.usernameLabel.text = viewModel.usernameAtIndex(indexPath)
+        
+        cell.profilePhoto.sd_setImageWithURL(viewModel.profileURLAtIndex(indexPath), placeholderImage: UIImage(named: "empty"))
+        
+        cell.flickrImageView.sd_setImageWithURL(viewModel.photoURLAtIndex(indexPath), placeholderImage: UIImage(named: "empty"))
         
         cell.flickrTitleLabel.text = viewModel.titleAtIndex(indexPath)
-        
+        cell.flickrTitleLabel.preferredMaxLayoutWidth = CGRectGetWidth(cell.flickrTitleLabel.frame)
+        cell.layoutIfNeeded()
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("PhotoDetail", sender: indexPath)
     }
+    
+    // MARK: ScrollView (on TableView)
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
@@ -133,15 +157,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let indexPath = (sender as! NSIndexPath)
         
-        let cachedImage = SDImageCache.sharedImageCache()
-        let photoURLString = viewModel.photoAtIndex(indexPath)
-        let image = cachedImage!.imageFromDiskCacheForKey(photoURLString)
-        
-        if segue.identifier == "PhotoDetail" {
-            let details = (segue.destinationViewController as! PhotoDetailsController)
-            details.photoTitle = viewModel.titleAtIndex(indexPath)
-            details.photoImage = image
+        if let image:UIImage = self.viewModel.validateImageAtIndex(indexPath) {
+                    
+            if segue.identifier == "PhotoDetail" {
+                let details = (segue.destinationViewController as! PhotoDetailsController)
+                details.photoTitle = self.viewModel.titleAtIndex(indexPath)
+                details.photoImage = image
+                details.userName = self.viewModel.usernameAtIndex(indexPath)
+                details.userProfile = self.viewModel.validateProfileAtIndex(indexPath)
+            }
         }
     }
 }
-

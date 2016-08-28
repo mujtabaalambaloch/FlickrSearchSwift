@@ -22,6 +22,9 @@ class Photo: Mappable {
     
     var url: String?
     
+    var username: String?
+    var profileImage: String?
+    
     required init?(_ map: Map) {
     }
     

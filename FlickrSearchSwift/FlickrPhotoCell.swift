@@ -13,9 +13,16 @@ class FlickrPhotoCell: UITableViewCell {
 
     @IBOutlet weak var flickrTitleLabel: UILabel!
     
+    @IBOutlet weak var profilePhoto: UIImageView!
+    
+    @IBOutlet weak var usernameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.profilePhoto.layer.cornerRadius = self.profilePhoto.frame.size.width / 2
+        self.profilePhoto.clipsToBounds = true
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
