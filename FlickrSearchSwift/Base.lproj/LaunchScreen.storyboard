@@ -23,11 +23,11 @@
                                     <constraint firstAttribute="width" constant="127" id="yES-Uf-NS1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.38823529410000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="RMo-uK-H9m" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Cqf-QJ-stM"/>
                             <constraint firstItem="RMo-uK-H9m" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="3.5" id="izU-7X-3d0"/>
