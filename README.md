@@ -13,4 +13,4 @@ This is a basic Flickr Photo Search done in Swift. Which contains the following 
 3. [SDWebImage](https://github.com/rs/SDWebImage) - To download images and cache them
 4. [MBProgressHub](https://github.com/jdg/MBProgressHUD) - Loading Indicator used while calling Flickr API
 
-> Flickr API Key must be added in the **Constants.h** under **flickrAPIKey** folder
+> Flickr API Key must be added in the **Constants.h** file under **flickrAPIKey**
