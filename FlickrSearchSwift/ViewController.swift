@@ -31,12 +31,13 @@ class ViewController: UIViewController {
         self.searchButton.layer.cornerRadius = 2.0
         self.textfieldPadding()
         
-        self.viewModel.setupArr()
-        
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 320
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         self.emptyTable()
+        
+        self.viewModel.setupArr()
+        self.callAPI("Landscape", pageNum: 1)
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,7 +59,6 @@ class ViewController: UIViewController {
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
-        self.validateText()
         return true
     }
     
@@ -81,6 +81,10 @@ class ViewController: UIViewController {
             
             if self.viewModel.numberOfRow() <= 0 {
                 self.messageLabel!.text = "No Data Found\nPlease Try Search Again"
+            } else {
+                if pageNum == 1 {
+                    self.tableView.setContentOffset(CGPointZero, animated:false)
+                }
             }
             
             self.tableView.reloadData()
@@ -91,7 +95,6 @@ class ViewController: UIViewController {
     
     func emptyTable() {
         messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-        //messageLabel!.text = "Please Try Search\nTo Find Images"
         messageLabel!.textColor = UIColor.lightGrayColor()
         messageLabel!.numberOfLines = 0
         messageLabel!.textAlignment = .Center
