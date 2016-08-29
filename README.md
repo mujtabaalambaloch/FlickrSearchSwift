@@ -1,8 +1,8 @@
 # FlickrSearchSwift
 
-**Note: This is only supports on iOS 9+ Device**
+**Note: This only runs on iOS 9+ Device**
 
-To run simple run the **FlickrSearchSwift.xcworkspace**
+To run simple open the **FlickrSearchSwift.xcworkspace**
 
 From Xcode: Connect Device, Product > Run
 
